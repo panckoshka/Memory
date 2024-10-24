@@ -29,3 +29,7 @@ Welcome to this exciting and fun Memory Pair Game! It’s designed to help you i
 - The game can have different levels by increasing the grid size or shortening the memorization time.
 
 This game is perfect for building memory and concentration skills while having fun with friends!
+
+### Flow Chart
+
+![memory](https://github.com/user-attachments/assets/0b42bead-4c40-4cca-a648-38f75d91eedb) 
