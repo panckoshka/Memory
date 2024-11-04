@@ -191,3 +191,5 @@ void fillMatrixWithRandomPairs(int listNumPair[N][N], int totalPairs) {
     
     } while (pair <= totalPairs);
 }
+
+// TODO: think about other improvements
