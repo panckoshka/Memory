@@ -9,17 +9,14 @@
 #include <cstdlib>
 #include <time.h>       /* time */
 
-
-using namespace std;
-
 // clean screen - funtion
 void cleanScreen (){
     for (int i = 0; i < 100; i++){
-        cout << "\n";
+        std::cout << "\n";
     }
 }
 
-const int N = 4;
+const int N = 2;
 //const int N = 2; // use size 2 only for test
 
 void printMatrix(int[N][N]);
@@ -28,6 +25,20 @@ void fillMatrixWithRandomPairs(int[N][N], int);
 
 // TODO: add Player class
 // TODO: add player name
+
+
+class Player {
+public:
+    std::string name;
+    int score;
+    
+    Player(std::string playerName) : name(std::move(playerName)), score(0) {}
+
+    void incrementScore() {
+        score++;
+       
+    }
+};
 
 int gameMemoSendBox() {
     int matrix0[N][N];
@@ -47,6 +58,19 @@ int gameMemoSendBox() {
     
     fillMatrixWithRandomPairs(listNumPair,totalPairs);
     
+    std::string player1Name, player2Name;
+    std::cout <<"✖ Enter Player 1 Name: ";
+    std::cin >> player1Name;
+    std::cout <<"━══━━══━──━══━──━══━──━══━──━══━\n";
+    std::cout <<"✖ Enter Player 2 Name: ";
+    std::cin >> player2Name;
+    cleanScreen();
+    
+    //message, so that the user knows that the numbers will be displayed
+    std::cout << "━══━𖣯━═┫ Memorize the following numbers ┣═━𖣯━══━\n\n";
+    sleep(3);
+    cleanScreen();
+    
     // initiate two counters: how many pairs each player opened
     int player1pairs = 0;
     int player2pairs = 0;
@@ -57,12 +81,13 @@ int gameMemoSendBox() {
     // start do while loop until number of open pairs less than to total number of pairs
     do {
         
+        //print number
         printMatrix(listNumPair);
-        cout << "Sleeping for 3s and clearing the screen...\n";
+        std::cout << "\n━══━𖣯━═┫ Sleeping for 4s and clearing the screen... ┣═━𖣯━══━\n";
         
-        // sleep for 3 s
+        // sleep for 4 s
         // works for macos and linux
-        sleep(5);
+        sleep(4);
         
         //call cleanScreen funtion
         cleanScreen();
@@ -77,12 +102,12 @@ int gameMemoSendBox() {
         
         // TODO: print information who is moving right now
         // TODO: print information who many point current player has
-        cout << "Enter numbers example 0 1: ";
-        cin >> firstCellRow >> firstCellCol;
-        cout << "Enter numbers example 0 1: ";
-        cin >> secondCellRow >> secondCellCol;
-        cout << "Enter num pair: ";
-        cin >> numPair;
+        std::cout << "✖ Enter numbers [Example 0 1]: ";
+        std::cin >> firstCellRow >> firstCellCol;
+        std::cout << "✖ Enter numbers [Example 0 1]: ";
+        std::cin >> secondCellRow >> secondCellCol;
+        std::cout << "✖ Enter num pair: ";
+        std::cin >> numPair;
         
         // TODO: figure out the better names for variables
         bool cond1 = listNumPair[firstCellRow][firstCellCol] == numPair &&
@@ -117,13 +142,13 @@ int gameMemoSendBox() {
         
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                cout << matrix0[i][j] << " ";
+                std::cout << matrix0[i][j] << " ";
             }
-            cout << endl;
+            std::cout << std::endl;
         }
         
         
-        cout << endl;
+        std::cout << std::endl;
         
     } while (player1pairs + player2pairs < totalPairs);
     // loop ends
@@ -131,19 +156,19 @@ int gameMemoSendBox() {
     // if player1 opened more pairs than player2
     if (player1pairs > player2pairs) {
         // player1 won
-        cout << "Player 1 is the winner!";
+        std::cout << "━══━𖣯━═┫ Player 1 is the winner! ┣═━𖣯━══━";
     }
     // else if player2 opened more pairs than player1
     else if (player2pairs > player1pairs) {
         // player2 won
-        cout << "Player 2 is the winner!";
+        std::cout << "━══━𖣯━═┫ Player 2 is the winner! ┣═━𖣯━══━";
     }
     // else
     else {
         // it's a tie
-        cout << "it's a tie!";
+        std::cout << "━══━𖣯━═┫ it's a tie! ┣═━𖣯━══━" <<std::endl;
     }
-    cout << endl;
+    std::cout << std::endl;
     
     return 0;
 }
@@ -151,7 +176,7 @@ int gameMemoSendBox() {
 void mainMenu();  //Prototype, so returnToMain recognize the mainMenu funcion
 void returnToMain (){
     int returnKey;
-    std::cout << "✖ ᴇɴᴛᴇʀ [𝟣] ᴛᴏ ʀᴇᴛᴜʀɴ ᴛᴏ ᴍᴀɪɴ ᴍᴇɴᴜ: ";
+    std::cout << "✖ Enter [1] To Return To Main Menu: ";
     std::cin >> returnKey;
     if (returnKey == 1) {
         cleanScreen();
@@ -162,38 +187,63 @@ void returnToMain (){
 //----- mainMenu ------
 void mainMenu(){
     int option;
-    std::cout << "┏═━𖣯━══━𖣯━══━𖣯━═┫ Wᴇʟᴄᴏᴍᴇ Tᴏ Tʜᴇ Mᴇᴍᴏʀʏ Gᴀᴍᴇ ┣═━𖣯━══━𖣯━══━𖣯━═┓\n\n";
-    std::cout << "                  ✖ sᴛᴀʀᴛ ɢᴀᴍᴇ        [𝟭]\n";
-    std::cout << "                  ✖ ʜᴏᴡ ᴛᴏ ᴘʟᴀʏ       [𝟮]\n";
-    std::cout << "                  ✖ ᴄʀᴇᴅɪᴛs           [𝟯]\n\n";
-    std::cout << "┗═━𖣯━═━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━═━𖣯━═┛\n\n";
-    std::cout << "✖ ᴇɴᴛᴇʀ ʏᴏᴜʀ ᴏᴘᴛɪᴏɴ: ";
+    std::cout << "┏═━𖣯━══━𖣯━══━𖣯━═┫ Welcome  To  The  Memory  Game ┣═━𖣯━══━𖣯━══━𖣯━═┓\n\n";
+    std::cout << "                    ✖ Start Game        [1]\n";
+    std::cout << "                    ✖ How To Play       [2]\n";
+    std::cout << "                    ✖ Credits           [3]\n\n";
+    std::cout << "┗══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══┛\n\n";
+    std::cout << "✖ Enter Your Option: ";
     std::cin >> option;
     
     cleanScreen();
     
+    //multiplayer or solo
     if(option == 1){
-        gameMemoSendBox();
-    }
-    else if (option == 2){
-    std::cout << "┏═━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━═┫ How To Play ┣═━𖣯━══━𖣯━══━𖣯━══━\n\n";
-    std::cout << "ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ᴛʜɪꜱ ᴇxᴄɪᴛɪɴɢ ᴀɴᴅ ꜰᴜɴ ᴍᴇᴍᴏʀʏ ᴘᴀɪʀ ɢᴀᴍᴇ! ɪᴛ’ꜱ ᴅᴇꜱɪɢɴᴇᴅ ᴛᴏ ʜᴇʟᴘ ʏᴏᴜ ɪᴍᴘʀᴏᴠᴇ ʏᴏᴜʀ ᴍᴇᴍᴏʀʏ ᴀɴᴅ ꜰᴏᴄᴜꜱ. ʜᴇʀᴇ ᴀʀᴇ ᴛʜᴇ ꜱᴛᴇᴘꜱ ᴛᴏ ᴘʟᴀʏ:\n\n";
-    std::cout << "𝟣. ꜱᴇᴛᴜᴘ ᴛʜᴇ ɢᴀᴍᴇ: ᴛʜᴇ ɢᴀᴍᴇ ʜᴀꜱ ᴘᴀɪʀꜱ ᴏꜰ ɴᴜᴍʙᴇʀꜱ ᴘʟᴀᴄᴇᴅ ꜰᴀᴄᴇ ᴅᴏᴡɴ ᴏɴ ᴀ ɢʀɪᴅ. ᴇᴀᴄʜ ɴᴜᴍʙᴇʀ ᴀᴘᴘᴇᴀʀꜱ ᴛᴡɪᴄᴇ ᴏɴ ᴛʜᴇ ɢʀɪᴅ, ᴄʀᴇᴀᴛɪɴɢ ᴀ ᴘᴀɪʀ.\n";
-    std::cout << "𝟤. ᴍᴇᴍᴏʀɪᴢᴀᴛɪᴏɴ: ʏᴏᴜ ᴡɪʟʟ ɢᴇᴛ ᴀ ꜰᴇᴡ ꜱᴇᴄᴏɴᴅꜱ (ᴇ.ɢ., 𝟥 ꜱᴇᴄᴏɴᴅꜱ) ᴛᴏ ʟᴏᴏᴋ ᴀᴛ ᴛʜᴇ ɢʀɪᴅ ᴀɴᴅ ᴍᴇᴍᴏʀɪᴢᴇ ᴡʜᴇʀᴇ ᴛʜᴇ ɴᴜᴍʙᴇʀꜱ ᴀʀᴇ ʟᴏᴄᴀᴛᴇᴅ.\n";
-    std::cout << "𝟥. ꜰʟɪᴘ ʙᴀᴄᴋ: ᴀꜰᴛᴇʀ ᴛʜᴇ ꜱʜᴏʀᴛ ᴛɪᴍᴇ, ᴛʜᴇ ɴᴜᴍʙᴇʀꜱ ᴀʀᴇ ꜰʟɪᴘᴘᴇᴅ ʙᴀᴄᴋ ᴏᴠᴇʀ, ʜɪᴅɪɴɢ ᴛʜᴇᴍ.\n";
-    std::cout << "𝟦. ᴛᴀᴋᴇ ᴛᴜʀɴꜱ: ᴘʟᴀʏᴇʀꜱ ᴛᴀᴋᴇ ᴛᴜʀɴꜱ ᴄʜᴏᴏꜱɪɴɢ ᴛᴡᴏ ꜱᴘᴏᴛꜱ ᴏɴ ᴛʜᴇ ɢʀɪᴅ ᴛᴏ ꜰʟɪᴘ ᴏᴠᴇʀ. ɪꜰ ᴛʜᴇ ɴᴜᴍʙᴇʀꜱ ᴏɴ ʙᴏᴛʜ ꜱᴘᴏᴛꜱ ᴍᴀᴛᴄʜ, ᴛʜᴇ ᴘʟᴀʏᴇʀ ꜱᴄᴏʀᴇꜱ ᴀ ᴘᴏɪɴᴛ ᴀɴᴅ ᴋᴇᴇᴘꜱ ᴛʜᴇ ᴘᴀɪʀ ꜰʟɪᴘᴘᴇᴅ.  ɪꜰ ᴛʜᴇʏ ᴅᴏɴ’ᴛ ᴍᴀᴛᴄʜ, ᴛʜᴇ ɴᴜᴍʙᴇʀꜱ ᴀʀᴇ ꜰʟɪᴘᴘᴇᴅ ʙᴀᴄᴋ ᴏᴠᴇʀ, ᴀɴᴅ ᴛʜᴇ ɴᴇxᴛ ᴘʟᴀʏᴇʀ ᴛᴀᴋᴇꜱ ᴛʜᴇɪʀ ᴛᴜʀɴ.\n";
-    std::cout << "𝟧. ᴡɪɴɴɪɴɢ ᴛʜᴇ ɢᴀᴍᴇ: ᴛʜᴇ ɢᴀᴍᴇ ᴄᴏɴᴛɪɴᴜᴇꜱ ᴜɴᴛɪʟ ᴀʟʟ ᴘᴀɪʀꜱ ᴀʀᴇ ꜰᴏᴜɴᴅ.  ᴛʜᴇ ᴘʟᴀʏᴇʀ ᴡɪᴛʜ ᴛʜᴇ ᴍᴏꜱᴛ ᴘᴏɪɴᴛꜱ ᴀᴛ ᴛʜᴇ ᴇɴᴅ ᴏꜰ ᴛʜᴇ ɢᴀᴍᴇ ᴡɪɴꜱ.\n\n";
+        int optionTwo;
+        std::cout << "┏═━𖣯━══━𖣯━══━𖣯━═┫ Game  Mode ┣═━𖣯━══━𖣯━══━𖣯━═┓\n\n";
+        std::cout << "           ✖ Solo               [1]\n";
+        std::cout << "           ✖ Multiplayer        [2]\n\n";
+        std::cout << "           ✖ go to Main Menu    [3]\n\n";
+        std::cout << "┗══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━┛\n\n";
+        std::cout << "✖ Enter Your Option: ";
+        std::cin >> optionTwo;
+        if (optionTwo == 1) {
+            cleanScreen();
+            std::cout << "✖ SOLO MODE HERE\n";//For test
+            //TODO: add the solo or single player mode
+        } else if (optionTwo == 2){
+            cleanScreen();
+            gameMemoSendBox();
+            //TODO: we have to add a funtion or something so the users can return to the main menu while they are playing.
+        } else if (optionTwo == 3){
+            cleanScreen();
+            mainMenu();
+        }else {
+            std::cout << "━══━𖣯━═┫ Invalid Option Entered ┣═━𖣯━══━\n";
+            returnToMain();
+        }
+    }else if (option == 2){
+    std::cout << "┏═━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━═┫ How To Play┣═━𖣯━══━𖣯━══━𖣯━══━\n\n";
+    std::cout << "Welcome to this exciting and fun memory pair game! It’s designed to help you improve your memory and focus. Here are the steps to play:\n\n";
+    std::cout << "1. Setup the game: The game has pairs of numbers placed face down on a grid. Each number appears twice on the grid, creating a pair.\n";
+    std::cout << "2. Memorization: You will get a few seconds (e.g., 3 seconds) to look at the grid and memorize where the numbers are located.\n";
+    std::cout << "3. Flip back: After the short time, the numbers are flipped back over, hiding them.\n";
+    std::cout << "4. Take turns: Players take turns choosing two spots on the grid to flip over. If the numbers on both spots match, the player scores a point and keeps the pair flipped. If they don’t match, the numbers are flipped back over, and the next player takes their turn.\n";
+    std::cout << "5. Winning the game: The game continues until all pairs are found. The player with the most points at the end of the game wins.\n\n";
     std::cout << "┗═━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━═━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━═━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━══━𖣯━─\n\n";
         returnToMain();
     }
     else if (option == 3){
-    std::cout << "┏═━𖣯━═┫ ᴄʀᴇᴅɪᴛꜱ ┣═━𖣯━═┓\n";
-    std::cout << "     ✖ ᴀɴᴀꜱᴛᴀꜱɪɪᴀ\n";
-    std::cout << "     ✖ ᴊᴀᴠᴏɴ\n";
-    std::cout << "     ✖ ᴇʀɪᴋᴀ\n";
-    std::cout << "     ✖ ᴊᴜꜱᴛɪɴ\n";
-    std::cout << "     ✖ ᴀʟᴀɴ\n";
+    std::cout << "┏═━𖣯━═┫ Credits ┣═━𖣯━═┓\n";
+    std::cout << "     ✖ Anastaassia\n";
+    std::cout << "     ✖ Javon\n";
+    std::cout << "     ✖ Erika\n";
+    std::cout << "     ✖ Justin\n";
+    std::cout << "     ✖ Alan\n";
     std::cout << "┗═━𖣯━══━𖣯━══━𖣯━══━𖣯━═┛\n\n";
+        returnToMain();
+    } else {
+        std::cout << "━══━𖣯━═┫ Invalid Option Entered ┣═━𖣯━══━\n";
         returnToMain();
     }
 }
@@ -209,11 +259,11 @@ int main(int argc, const char * argv[]) {
 void printMatrix(int matrix[N][N]) {
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            cout << matrix[i][j] << " ";
+            std::cout << matrix[i][j] << " ";
         }
-        cout << endl;
+        std::cout << std::endl;
     }
-    cout << endl;
+    std::cout << std::endl;
 }
 
 void fillMatrixWithRandomPairs(int listNumPair[N][N], int totalPairs) {
