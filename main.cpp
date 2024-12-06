@@ -30,8 +30,18 @@ void fillMatrixWithRandomPairs(int[N][N], int);
 // tests if player won or not
 void testSoloWin(int l, int o);
 
-// TODO: add Player class
-// TODO: add player name
+class Player {
+public:
+    std::string name;
+    int score;
+
+    Player(std::string playerName) : name(std::move(playerName)), score(0) {}
+
+    void incrementScore() {
+        score++;
+
+    }
+};
 
 int gameMemoSendBox() {
     int matrix0[N][N];
