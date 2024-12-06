@@ -361,7 +361,7 @@ void mainMenu() {
         returnToMain();
     } else if (option == 3) {
         std::cout << "┏═━𖣯━═┫ Credits ┣═━𖣯━═┓\n";
-        std::cout << "     ✖ Anastaassia\n";
+        std::cout << "     ✖ Anastasiia\n";
         std::cout << "     ✖ Javon\n";
         std::cout << "     ✖ Erika\n";
         std::cout << "     ✖ Justin\n";
