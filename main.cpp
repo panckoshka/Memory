@@ -31,7 +31,7 @@ void fillMatrixWithRandomPairs(int[N][N], int);
 void testSoloWin(int l, int o);
 
 class Player {
-public:
+  public:
     std::string name;
     int score;
 
@@ -83,7 +83,6 @@ int gameMemoSendBox() {
     // start do while loop until number of open pairs less than to total number
     // of pairs
     do {
-
         printMatrix(listNumPair);
         std::cout << "\n━══━𖣯━═┫ Sleeping for 4s and clearing the screen... "
                      "┣═━𖣯━══━\n";
@@ -301,7 +300,6 @@ void returnToMain() {
 }
 
 //----- mainMenu ------
-
 void mainMenu() {
     int option;
     std::cout << "┏═━𖣯━══━𖣯━══━𖣯━═┫ Welcome  To  The  Memory  Game "
