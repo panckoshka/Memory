@@ -37,10 +37,7 @@ class Player {
 
     Player(std::string playerName) : name(std::move(playerName)), score(0) {}
 
-    void incrementScore() {
-        score++;
-
-    }
+    void incrementScore() { score++; }
 };
 
 int gameMemoSendBox() {
@@ -327,12 +324,9 @@ void mainMenu() {
         if (optionTwo == 1) {
             cleanScreen();
             singlePlayerSendBox();
-            // TODO: add the solo or single player mode
         } else if (optionTwo == 2) {
             cleanScreen();
             gameMemoSendBox();
-            // TODO: we have to add a funtion or something so the users can
-            // return to the main menu while they are playing.
         } else if (optionTwo == 3) {
             cleanScreen();
             mainMenu();
